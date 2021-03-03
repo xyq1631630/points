@@ -16,18 +16,18 @@ class Table extends Component {
     }
 
     showAll() {
+        //d1 is the range from one month ago to today
         let d1 = new Date((new Date).setMonth((new Date).getMonth() - 1));
         let d2 = new Date((new Date).setMonth((new Date).getMonth() - 2));
         let d3 = new Date((new Date).setMonth((new Date).getMonth() - 3));
 
         //filter
-        // console.log(this.props.list);
-
+        //Select all the transaction from three months ago to today.
         let listOfLastThreeMonths = this.props.list.filter(customer => new Date(customer.date) >= d3);
 
         //total
-        let total = [{id: 1, point: 1000}];
-        total = Array.from(listOfLastThreeMonths
+        //Use reduce function to add all the points based on customer Id
+        let total = Array.from(listOfLastThreeMonths
             .reduce((c, {id, point}) => c.set(id, (c.get(id) || 0) + point), new Map), ([id, point]) => ({id, point})
         );
 
@@ -55,7 +55,6 @@ class Table extends Component {
             }
         })
     }
-
 
     render() {
         // console.log(this.props.list)
